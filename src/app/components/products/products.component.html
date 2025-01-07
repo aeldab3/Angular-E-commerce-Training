@@ -1,0 +1,25 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="col" *ngFor="let product of filteredProducts; trackBy: trackItem">
+    <div class="card h-100" appHighlightCard="lightblue" externalColor="pink">
+      <img [src]="product.imageUrl" class="card-img-top" [alt]="product.name" loading="lazy">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">Price: {{ product.price | currency: 'EGP' }}</p>
+        <p class="card-text" *ngIf="product.quantity != 1; else lastItem">Quantity: {{ product.quantity }}</p>
+        <ng-template #lastItem>
+          <p class="card-text text-danger">Last Item</p>
+        </ng-template>
+        <input type="number" class="form-control my-2" min="1" #countInp [defaultValue]="1">
+        <div class="mt-auto">
+          <button class="btn btn-primary w-100 mb-2" [disabled]="product.quantity === 0"
+            (click)="buy(countInp.value, product.price); decrementQuantity(product, countInp.value)">
+            Add to Cart
+          </button>
+          <button class="btn btn-secondary w-100" (click)="navigateToDetails(product.id, product.name)">
+            Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
