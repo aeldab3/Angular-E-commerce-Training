@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -12,6 +13,7 @@ import { IProduct } from '../../models/iproduct';
 import { HighlightCardDirective } from '../../directives/highlight-card.directive';
 import { StaticProductsService } from '../../services/static-products.service';
 import { Router } from '@angular/router';
+import { ApiProductsService } from '../../services/api-products.service';
 
 @Component({
   selector: 'app-products',
@@ -20,8 +22,8 @@ import { Router } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
-export class ProductsComponent implements OnChanges {
-  products: IProduct[];
+export class ProductsComponent implements OnChanges, OnInit {
+  products: IProduct[] = [] as IProduct[];
   filteredProducts: IProduct[];
   totalOrderPrice: number = 0;
 
@@ -29,16 +31,34 @@ export class ProductsComponent implements OnChanges {
   @Output() onTotalPriceChanged: EventEmitter<number>;
   constructor(
     private _StaticProductsService: StaticProductsService,
-    private router: Router
+    private router: Router,
+    private _apiProductsService: ApiProductsService
   ) {
-    this.products = this._StaticProductsService.getAllProducts();
+    // this.products = this._StaticProductsService.getAllProducts();
     this.filteredProducts = this.products;
     this.onTotalPriceChanged = new EventEmitter<number>();
   }
+  ngOnInit(): void {
+    this._apiProductsService.getAllProducts().subscribe({
+      next: (res) => {
+        this.products = res;
+        this.filteredProducts = this.products;
+      },
+      error: (err) => {
+        console.error(err.message);
+      },
+    });
+  }
   ngOnChanges() {
-    this.filteredProducts = this._StaticProductsService.getProductsByCatId(
-      this.receivedCatId
-    );
+    this._apiProductsService.getProductByCatId(this.receivedCatId).subscribe({
+      next: (res) => {
+        this.filteredProducts = res;
+        console.log(this.filteredProducts);
+      },
+      error: (err) => {
+        console.error(err.message);
+      },
+    });
   }
   trackItem(index: number, product: IProduct) {
     return product.id;

@@ -1,0 +1,82 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Lenvo thinpad X230",
+      "price": 25000,
+      "quantity": 10,
+      "catId": 1,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "2",
+      "name": "Dell",
+      "price": 50000,
+      "quantity": 20,
+      "catId": 1,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "3",
+      "name": "Lenovo Tab",
+      "price": 15000,
+      "quantity": 10,
+      "catId": 2,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "4",
+      "name": "Samsung Tab",
+      "price": 19000,
+      "quantity": 10,
+      "catId": 2,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "5",
+      "name": "IPone 16X",
+      "price": 45000,
+      "quantity": 10,
+      "catId": 3,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "6",
+      "name": "Samsung S24",
+      "price": 24000,
+      "quantity": 10,
+      "catId": 3,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": 7,
+      "name": "Samsung S23",
+      "price": 21000,
+      "quantity": 5,
+      "catId": 3,
+      "imageUrl": "https://picsum.photos/200"
+    },
+    {
+      "id": "8dcc",
+      "name": "Dell insperon",
+      "price": 55000,
+      "quantity": 18,
+      "imageUrl": "C:\\fakepath\\Dell All in one Gaming.jpg",
+      "catId": "1"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Laptops"
+    },
+    {
+      "id": "2",
+      "name": "Tablets"
+    },
+    {
+      "id": "3",
+      "name": "Mobiles"
+    }
+  ]
+}

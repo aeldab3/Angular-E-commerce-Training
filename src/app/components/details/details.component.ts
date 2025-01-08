@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StaticProductsService } from '../../services/static-products.service';
 import { IProduct } from '../../models/iproduct';
 import { CommonModule, Location } from '@angular/common';
+import { ApiProductsService } from '../../services/api-products.service';
 
 @Component({
   selector: 'app-details',
@@ -20,14 +21,22 @@ export class DetailsComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _StaticProductsService: StaticProductsService,
     private _location: Location,
-    private _router: Router
+    private _router: Router,
+    private _apiProductsService: ApiProductsService
   ) {
     this.idsArr = this._StaticProductsService.mapProductsToIds();
   }
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((params) => {
       this.id = Number(params.get('id'));
-      this.product = this._StaticProductsService.getProductById(this.id);
+      this._apiProductsService.getProductById(this.id).subscribe({
+        next: (res) => {
+          this.product = res;
+        },
+        error: (err) => {
+          console.error(err.message);
+        },
+      });
     });
   }
   goBack() {

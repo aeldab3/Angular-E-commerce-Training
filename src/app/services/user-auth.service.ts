@@ -21,7 +21,10 @@ export class UserAuthService {
   }
 
   getUserLogged(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token') ? true : false;
+    }
+    return false;
   }
 
   getAuthSubject(): BehaviorSubject<boolean> {
