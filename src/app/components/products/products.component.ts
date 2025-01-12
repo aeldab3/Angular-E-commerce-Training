@@ -50,15 +50,25 @@ export class ProductsComponent implements OnChanges, OnInit {
     });
   }
   ngOnChanges() {
-    this._apiProductsService.getProductByCatId(this.receivedCatId).subscribe({
-      next: (res) => {
-        this.filteredProducts = res;
-        console.log(this.filteredProducts);
-      },
-      error: (err) => {
-        console.error(err.message);
-      },
-    });
+    if (this.receivedCatId == 0) {
+      this._apiProductsService.getAllProducts().subscribe({
+        next: (res) => {
+          this.filteredProducts = res;
+        },
+        error: (err) => {
+          console.error(err.message);
+        },
+      });
+    } else {
+      this._apiProductsService.getProductByCatId(this.receivedCatId).subscribe({
+        next: (res) => {
+          this.filteredProducts = res;
+        },
+        error: (err) => {
+          console.error(err.message);
+        },
+      });
+    }
   }
   trackItem(index: number, product: IProduct) {
     return product.id;
@@ -75,7 +85,27 @@ export class ProductsComponent implements OnChanges, OnInit {
       return (product.quantity -= requestQuantity);
     }
   }
+
+  deleteProduct(id: number) {
+    const confirmation = confirm(
+      'Are you sure you want to delete this product?'
+    );
+    if (!confirmation) return;
+    this._apiProductsService.deleteProduct(id).subscribe({
+      next: () => {
+        this.filteredProducts = this.filteredProducts.filter(
+          (product) => product.id !== id
+        );
+      },
+      error: (err) => {
+        console.error(err.message);
+      },
+    });
+  }
   navigateToDetails(id: number, name: string) {
     this.router.navigateByUrl(`/details/${id}/${name}`);
+  }
+  navigateToUpdate(id: number, name: string) {
+    this.router.navigateByUrl(`/update-product/${id}/${name}`);
   }
 }

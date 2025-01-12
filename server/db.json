@@ -17,19 +17,11 @@
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "id": "3",
-      "name": "Lenovo Tab",
-      "price": 15000,
-      "quantity": 10,
-      "catId": 2,
-      "imageUrl": "https://picsum.photos/200"
-    },
-    {
       "id": "4",
       "name": "Samsung Tab",
       "price": 19000,
       "quantity": 10,
-      "catId": 2,
+      "catId": "3",
       "imageUrl": "https://picsum.photos/200"
     },
     {
@@ -37,29 +29,21 @@
       "name": "IPone 16X",
       "price": 45000,
       "quantity": 10,
-      "catId": 3,
+      "catId": "2",
       "imageUrl": "https://picsum.photos/200"
     },
     {
       "id": "6",
       "name": "Samsung S24",
-      "price": 24000,
-      "quantity": 10,
-      "catId": 3,
+      "price": 24550,
+      "quantity": 8,
+      "catId": "2",
       "imageUrl": "https://picsum.photos/200"
     },
     {
-      "id": 7,
-      "name": "Samsung S23",
-      "price": 21000,
-      "quantity": 5,
-      "catId": 3,
-      "imageUrl": "https://picsum.photos/200"
-    },
-    {
-      "id": "8dcc",
+      "id": "e184",
       "name": "Dell insperon",
-      "price": 55000,
+      "price": 25000,
       "quantity": 18,
       "imageUrl": "C:\\fakepath\\Dell All in one Gaming.jpg",
       "catId": "1"
@@ -72,11 +56,11 @@
     },
     {
       "id": "2",
-      "name": "Tablets"
+      "name": "Mobiles"
     },
     {
       "id": "3",
-      "name": "Mobiles"
+      "name": "Tablets"
     }
   ]
 }

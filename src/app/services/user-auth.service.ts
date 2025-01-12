@@ -26,6 +26,12 @@ export class UserAuthService {
     }
     return false;
   }
+  getToken() {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('token') ? localStorage.getItem('token') : '';
+    }
+    return '';
+  }
 
   getAuthSubject(): BehaviorSubject<boolean> {
     return this.authSubject;

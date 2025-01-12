@@ -9,11 +9,21 @@ import { DetailsComponent } from './components/details/details.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { OrderComponent } from './components/order/order.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default route
   { path: 'home', component: HomeComponent },
-  { path: 'products', component: ProductsComponent, canActivate: [authGuard] },
+  { path: 'order', component: OrderComponent },
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./components/products/products.component').then(
+        (obj) => obj.ProductsComponent
+      ),
+    canActivate: [authGuard],
+  },
   { path: 'details/:id/:name', component: DetailsComponent },
   {
     path: 'about',
@@ -25,6 +35,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'login', component: LoginComponent },
-  { path: 'addproduct', component: AddProductComponent },
+  { path: 'add-product', component: AddProductComponent },
+  { path: 'update-product/:id/:name', component: UpdateProductComponent },
   { path: '**', component: NotFoundComponent }, // Fallback wildcard route
 ];

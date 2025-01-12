@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 export class AddProductComponent {
   categories: Icategory[];
   newProduct: IProduct = {} as IProduct;
-  selectedFile: File | null = null;
   constructor(
     private _apiProductsService: ApiProductsService,
     private router: Router
@@ -25,9 +24,6 @@ export class AddProductComponent {
       { id: 2, name: 'Mobile' },
       { id: 3, name: 'Tablet' },
     ];
-  }
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
   }
   addNewProduct() {
     this._apiProductsService.addProduct(this.newProduct).subscribe({
@@ -40,26 +36,7 @@ export class AddProductComponent {
       },
     });
   }
-
-  /*  addNewProduct() {
-    if (this.selectedFile) {
-      const formData: FormData = new FormData();
-      formData.append('name', this.newProduct.name);
-      formData.append('price', this.newProduct.price.toString());
-      formData.append('quantity', this.newProduct.quantity.toString());
-      formData.append('catId', this.newProduct.catId.toString());
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-      this._apiProductsService.addProduct(formData).subscribe({
-        next: () => {
-          alert('Product added successfully');
-          this.router.navigate(['/products']);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    } else {
-      alert('Please select an image file.');
-    }
-  } */
+  onReset() {
+    this.newProduct = {} as IProduct;
+  }
 }
