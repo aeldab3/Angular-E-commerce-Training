@@ -11,6 +11,7 @@ import { authGuard } from './guards/auth.guard';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { OrderComponent } from './components/order/order.component';
+import { RegisterComponent } from './components/account/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, // Default route
@@ -35,6 +36,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'add-product', component: AddProductComponent },
   { path: 'update-product/:id/:name', component: UpdateProductComponent },
   { path: '**', component: NotFoundComponent }, // Fallback wildcard route
