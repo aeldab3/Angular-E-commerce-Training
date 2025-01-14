@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +10,13 @@ export class UserAuthService {
     this.authSubject = new BehaviorSubject<boolean>(false);
   }
 
-  login() {
-    localStorage.setItem('token', 'eldab3eldab3');
-    this.authSubject.next(true);
+  login(email: string, password: string): Observable<boolean> {
+    if (email === 'eldab3@gmail.com' && password === 'Aa010Aa@') {
+      localStorage.setItem('token', 'eldab3eldab3');
+      this.authSubject.next(true);
+      return of(true);
+    }
+    return of(false);
   }
 
   logout() {

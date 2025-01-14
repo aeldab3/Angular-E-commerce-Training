@@ -37,7 +37,11 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'add-product', component: AddProductComponent },
+  {
+    path: 'add-product',
+    component: AddProductComponent,
+    canActivate: [authGuard],
+  },
   { path: 'update-product/:id/:name', component: UpdateProductComponent },
-  { path: '**', component: NotFoundComponent }, // Fallback wildcard route
+  { path: '**', component: NotFoundComponent },
 ];

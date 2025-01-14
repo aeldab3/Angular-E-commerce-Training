@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,9 @@ import {
 })
 export class RegisterComponent {
   userRegisterForm: FormGroup;
-  constructor(private fb: FormBuilder) {
+  errorMessage: string | null = null;
+  confirmPasswordStatus: string = '';
+  constructor(private fb: FormBuilder, private router: Router) {
     this.userRegisterForm = fb.group({
       name: [
         '',
@@ -36,31 +39,30 @@ export class RegisterComponent {
           ),
         ],
       ],
-      confirmPassword: [
-        '',
-        [Validators.required, this.passwordMatchValidator.bind(this)],
-      ],
-      address: fb.group({
-        city: [''],
-        street: [''],
-      }),
+      confirmPassword: ['', [Validators.required, this.passwordMatchValidator]],
+    });
+    this.userRegisterForm.get('password')?.valueChanges.subscribe(() => {
+      this.userRegisterForm.get('confirmPassword')?.updateValueAndValidity();
     });
   }
 
-  register() {
-    console.log(this.userRegisterForm.value);
+  onRegister(): void {
+    if (this.userRegisterForm.invalid) {
+      this.errorMessage = 'Please fill in all required fields correctly.';
+      return;
+    }
+    const { name, email, phoneNumbers, password, confirmPassword } =
+      this.userRegisterForm.value;
+
+    if (password !== confirmPassword) {
+      this.errorMessage = 'Passwords do not match.';
+      return;
+    }
+    alert('Registration successful!');
+    this.router.navigate(['/login']);
   }
   get name() {
     return this.userRegisterForm.get('name');
-  }
-  passwordMatchValidator(
-    control: FormControl
-  ): { [key: string]: boolean } | null {
-    const passwordControl = this.userRegisterForm?.get('password');
-    if (passwordControl && control.value !== passwordControl.value) {
-      return { passwordMismatch: true };
-    }
-    return null;
   }
 
   get phones() {
@@ -71,13 +73,29 @@ export class RegisterComponent {
       alert('You can have a maximum of 2 phone numbers.');
       return;
     }
-    this.phones.push(new FormControl('', [Validators.pattern('^[0-9]{11}$')]));
+    this.phones.push(this.fb.control('', [Validators.pattern('^[0-9]{11}$')]));
   }
+  get password() {
+    return this.userRegisterForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.userRegisterForm.get('confirmPassword');
+  }
+
+  passwordMatchValidator = (
+    control: FormControl
+  ): { [key: string]: boolean } | null => {
+    const password = this.userRegisterForm?.get('password')?.value;
+    if (password && control.value !== password) {
+      return { passwordMismatch: true };
+    }
+    return null;
+  };
+
   removePhoneNum(index: number) {
     if (this.phones.length > 1) {
       this.phones.removeAt(index);
-    } else {
-      alert('At least one phone number is required.');
     }
   }
 }

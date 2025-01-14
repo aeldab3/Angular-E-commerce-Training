@@ -1,32 +1,32 @@
 .container {
-  max-width: 600px;
+  max-width: 500px;
   margin: auto;
   padding: 20px;
-  background: #f9f9f9;
+  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  font-size: 1.8rem;
+h1, h2 {
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
 .form-control {
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-button {
+.btn {
   margin-top: 10px;
 }
 
 @media (max-width: 768px) {
-  .d-flex {
-    flex-direction: column;
+  .container {
+    padding: 15px;
   }
-  .form-control,
+
   .btn {
-    margin-top: 5px;
+    font-size: 0.9rem;
   }
 }
