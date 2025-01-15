@@ -19,7 +19,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   userRegisterForm: FormGroup;
   errorMessage: string | null = null;
-  confirmPasswordStatus: string = '';
   constructor(private fb: FormBuilder, private router: Router) {
     this.userRegisterForm = fb.group({
       name: [

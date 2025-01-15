@@ -5,6 +5,7 @@
       <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
         <input
+          name="email"
           type="email"
           id="email"
           class="form-control"
@@ -16,12 +17,13 @@
           "
           class="text-danger"
         >
-          Valid email is required.
+          Enter your email.
         </div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password:</label>
         <input
+          name="password"
           type="password"
           id="password"
           class="form-control"
@@ -34,7 +36,7 @@
           "
           class="text-danger"
         >
-          Password is required (minimum 6 characters).
+          Enter your password.
         </div>
       </div>
       <div class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</div>

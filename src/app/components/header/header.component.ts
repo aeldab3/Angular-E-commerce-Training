@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
       this.isUserLoggedIn = this._userAuthService.getUserLogged();
       this.router.navigate(['/login']);
     } else {
-      return;
+      this.router.navigate(['/products']);
     }
   }
 }

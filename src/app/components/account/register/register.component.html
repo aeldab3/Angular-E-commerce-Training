@@ -3,7 +3,7 @@
   (ngSubmit)="onRegister()"
   class="container"
 >
-  <h1 class="text-center">Register</h1>
+  <h2 class="text-center">Register</h2>
   <div class="mb-3">
     <label for="userName" class="form-label">Name:</label>
     <input
@@ -57,6 +57,7 @@
           >Phone #{{ i + 1 }}:</label
         >
         <input
+          name="phoneNumbers"
           type="text"
           [formControlName]="i"
           class="form-control me-2"
