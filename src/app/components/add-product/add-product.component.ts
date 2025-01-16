@@ -21,9 +21,9 @@ import { Router } from '@angular/router';
 export class AddProductComponent {
   addProductForm: FormGroup;
   categories: Icategory[] = [
-    { id: 1, name: 'Laptop' },
-    { id: 2, name: 'Mobile' },
-    { id: 3, name: 'Tablet' },
+    { id: '1', name: 'Laptop' },
+    { id: '2', name: 'Mobile' },
+    { id: '3', name: 'Tablet' },
   ];
   constructor(
     private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class AddProductComponent {
       price: [0, [Validators.required, Validators.min(1)]],
       quantity: [0, [Validators.min(0)]],
       imageUrl: [''],
-      catId: ['', Validators.required],
+      catId: [0, Validators.required],
       description: ['', Validators.maxLength(200)],
     });
   }

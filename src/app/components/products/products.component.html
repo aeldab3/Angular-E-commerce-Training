@@ -45,19 +45,19 @@
           </button>
           <button
             class="btn btn-outline-secondary"
-            (click)="navigateToDetails(product.id, product.name)"
+            (click)="navigateToDetails(product._id, product.name)"
           >
             Details
           </button>
           <button
             class="btn btn-outline-info"
-            (click)="navigateToUpdate(product.id, product.name)"
+            (click)="navigateToUpdate(product._id, product.name)"
           >
             Edit
           </button>
           <button
             class="btn btn-outline-danger"
-            (click)="deleteProduct(product.id)"
+            (click)="deleteProduct(product._id)"
           >
             Delete
           </button>

@@ -13,14 +13,14 @@ import { ProductsComponent } from '../products/products.component';
 })
 export class OrderComponent implements AfterViewInit {
   categories: Icategory[];
-  selectedCatId: number = 0;
+  selectedCatId: string = '';
   receivedTotalPrice: number = 0;
   @ViewChild('userNameInp') myInp!: ElementRef;
   constructor() {
     this.categories = [
-      { id: 1, name: 'Laptop' },
-      { id: 2, name: 'Mobile' },
-      { id: 3, name: 'Tablet' },
+      { id: '1', name: 'Laptop' },
+      { id: '2', name: 'Mobile' },
+      { id: '3', name: 'Tablet' },
     ];
   }
   ngAfterViewInit(): void {

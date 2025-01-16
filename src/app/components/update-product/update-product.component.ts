@@ -20,9 +20,9 @@ import { CommonModule } from '@angular/common';
 })
 export class UpdateProductComponent implements OnInit {
   categories: Icategory[] = [
-    { id: 1, name: 'Laptop' },
-    { id: 2, name: 'Mobile' },
-    { id: 3, name: 'Tablet' },
+    { id: '1', name: 'Laptop' },
+    { id: '2', name: 'Mobile' },
+    { id: '3', name: 'Tablet' },
   ];
   product: IProduct = {} as IProduct;
   updateProductForm: FormGroup;

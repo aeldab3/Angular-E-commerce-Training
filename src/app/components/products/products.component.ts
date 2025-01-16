@@ -27,7 +27,7 @@ export class ProductsComponent implements OnChanges, OnInit {
   filteredProducts: IProduct[];
   totalOrderPrice: number = 0;
 
-  @Input() receivedCatId: number = 0;
+  @Input() receivedCatId: string = '';
   @Output() onTotalPriceChanged: EventEmitter<number>;
   constructor(
     private _StaticProductsService: StaticProductsService,
@@ -40,8 +40,8 @@ export class ProductsComponent implements OnChanges, OnInit {
   }
   ngOnInit(): void {
     this._apiProductsService.getAllProducts().subscribe({
-      next: (res) => {
-        this.products = res;
+      next: (data) => {
+        this.products = data;
         this.filteredProducts = this.products;
       },
       error: (err) => {
@@ -50,10 +50,10 @@ export class ProductsComponent implements OnChanges, OnInit {
     });
   }
   ngOnChanges() {
-    if (this.receivedCatId == 0) {
+    if (this.receivedCatId == '') {
       this._apiProductsService.getAllProducts().subscribe({
-        next: (res) => {
-          this.filteredProducts = res;
+        next: (data) => {
+          this.filteredProducts = data;
         },
         error: (err) => {
           console.error(err.message);
@@ -71,7 +71,7 @@ export class ProductsComponent implements OnChanges, OnInit {
     }
   }
   trackItem(index: number, product: IProduct) {
-    return product.id;
+    return product._id;
   }
   buy(count: string, price: number) {
     this.totalOrderPrice += parseInt(count) * price;
@@ -86,7 +86,7 @@ export class ProductsComponent implements OnChanges, OnInit {
     }
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     const confirmation = confirm(
       'Are you sure you want to delete this product?'
     );
@@ -94,7 +94,7 @@ export class ProductsComponent implements OnChanges, OnInit {
     this._apiProductsService.deleteProduct(id).subscribe({
       next: () => {
         this.filteredProducts = this.filteredProducts.filter(
-          (product) => product.id !== id
+          (product) => product._id !== id
         );
       },
       error: (err) => {
@@ -102,10 +102,10 @@ export class ProductsComponent implements OnChanges, OnInit {
       },
     });
   }
-  navigateToDetails(id: number, name: string) {
+  navigateToDetails(id: string, name: string) {
     this.router.navigateByUrl(`/details/${id}/${name}`);
   }
-  navigateToUpdate(id: number, name: string) {
+  navigateToUpdate(id: string, name: string) {
     this.router.navigateByUrl(`/update-product/${id}/${name}`);
   }
 }

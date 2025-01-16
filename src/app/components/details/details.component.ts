@@ -12,10 +12,10 @@ import { ApiProductsService } from '../../services/api-products.service';
   styleUrl: './details.component.css',
 })
 export class DetailsComponent implements OnInit {
-  id!: number;
+  id!: string;
   name!: string;
   product: IProduct | null = null;
-  idsArr: number[];
+  idsArr: string[];
   currentIdIndex: number = 0;
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((params) => {
-      this.id = Number(params.get('id'));
+      this.id = params.get('id') ?? '';
       this._apiProductsService.getProductById(this.id).subscribe({
         next: (res) => {
           this.product = res;
